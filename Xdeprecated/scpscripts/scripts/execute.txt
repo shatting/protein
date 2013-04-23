@@ -1,0 +1,4 @@
+open shatting@login.mat.univie.ac.at
+call ./users/shatting/ampl/in/testknitro
+close
+exit

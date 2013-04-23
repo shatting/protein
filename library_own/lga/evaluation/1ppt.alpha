@@ -1,0 +1,70 @@
+HEADER    PANCREATIC HORMONE                      16-JAN-81   1PPT              
+COMPND    AVIAN PANCREATIC POLYPEPTIDE                                          
+SOURCE    TURKEY (MELEAGRIS $GALLOPAVO) PANCREAS                                
+AUTHOR    T.L.BLUNDELL,J.E.PITTS,I.J.TICKLE,S.P.WOOD                            
+REVDAT   7   15-OCT-91 1PPTF   3       SOURCE HETATM                            
+REVDAT   6   27-OCT-83 1PPTE   1       REMARK                                   
+REVDAT   5   30-SEP-83 1PPTD   1       REVDAT                                   
+REVDAT   4   13-JUN-83 1PPTC   1       JRNL   REMARK                            
+REVDAT   3   30-AUG-82 1PPTB   1       REMARK                                   
+REVDAT   2   15-SEP-81 1PPTA   1       JRNL                                     
+REVDAT   1   19-FEB-81 1PPT    0                                                
+JRNL        AUTH   T.L.BLUNDELL,J.E.PITTS,I.J.TICKLE,S.P.WOOD,C.-*W.WU          
+JRNL        TITL   X-RAY ANALYSIS (1.4-*ANGSTROMS RESOLUTION) OF AVIAN          
+JRNL        TITL 2 PANCREATIC POLYPEPTIDE. SMALL GLOBULAR PROTEIN               
+JRNL        TITL 3 HORMONE                                                      
+JRNL        REF    PROC.NAT.ACAD.SCI.USA         V.  78  4175 1981              
+JRNL        REFN   ASTM PNASA6  US ISSN 0027-8424                  040          
+REMARK   2 RESOLUTION. 1.37 ANGSTROMS.                                          
+REMARK   3 REFINEMENT. RESTRAINED LEAST-SQUARES.                                
+SEQRES   1     36  GLY PRO SER GLN PRO THR TYR PRO GLY ASP ASP ALA PRO          
+SEQRES   2     36  VAL GLU ASP LEU ILE ARG PHE TYR ASP ASN LEU GLN GLN          
+SEQRES   3     36  TYR LEU ASN VAL VAL THR ARG HIS ARG TYR                      
+HELIX    1   A PRO      2  PRO      8 10 POLYPROLINE HELIX                      
+HELIX    2   B VAL     14  THR     32  1                                        
+CRYST1   34.180   32.920   28.400  90.00 105.26  90.00 C 2           4          
+ORIGX1      1.000000  0.000000  0.000000        0.00000                         
+ORIGX2      0.000000  1.000000  0.000000        0.00000                         
+ORIGX3      0.000000  0.000000  1.000000        0.00000                         
+SCALE1       .029257  0.000000   .007982        0.00000                         
+SCALE2      0.000000   .030377  0.000000        0.00000                         
+SCALE3      0.000000  0.000000   .036498        0.00000                         
+ATOM      1  CA  GLY     1       1.470  -9.017  17.255  1.00  0.00              
+ATOM      2  CA  PRO     2      -1.135 -10.606  14.958  1.00  0.00              
+ATOM      3  CA  SER     3       -.626 -14.187  14.053  1.00  0.00              
+ATOM      4  CA  GLN     4        .489 -14.940  10.481  1.00  0.00              
+ATOM      5  CA  PRO     5      -2.414 -14.970   8.087  1.00  0.00              
+ATOM      6  CA  THR     6      -3.548 -18.158   6.308  1.00  0.00              
+ATOM      7  CA  TYR     7      -3.065 -18.017   2.495  1.00  0.00              
+ATOM      8  CA  PRO     8      -6.566 -18.626    .996  1.00  0.00              
+ATOM      9  CA  GLY     9      -5.423 -20.730  -1.983  1.00  0.00              
+ATOM     10  CA  ASP    10      -4.521 -19.865  -5.611  1.00  0.00              
+ATOM     11  CA  ASP    11      -8.106 -20.411  -6.537  1.00  0.00              
+ATOM     12  CA  ALA    12      -9.622 -18.132  -4.017  1.00  0.00              
+ATOM     13  CA  PRO    13     -11.981 -15.406  -5.466  1.00  0.00              
+ATOM     14  CA  VAL    14     -10.341 -11.949  -5.914  1.00  0.00              
+ATOM     15  CA  GLU    15     -12.142 -10.553  -2.855  1.00  0.00              
+ATOM     16  CA  ASP    16     -10.488 -13.190   -.722  1.00  0.00              
+ATOM     17  CA  LEU    17      -7.028 -12.438  -2.126  1.00  0.00              
+ATOM     18  CA  ILE    18      -7.676  -8.682  -1.354  1.00  0.00              
+ATOM     19  CA  ARG    19      -8.636  -9.644   2.284  1.00  0.00              
+ATOM     20  CA  PHE    20      -5.441 -11.780   2.548  1.00  0.00              
+ATOM     21  CA  TYR    21      -3.402  -8.885   1.007  1.00  0.00              
+ATOM     22  CA  ASP    22      -4.728  -6.473   3.688  1.00  0.00              
+ATOM     23  CA  ASN    23      -4.038  -8.947   6.542  1.00  0.00              
+ATOM     24  CA  LEU    24       -.451  -9.679   5.213  1.00  0.00              
+ATOM     25  CA  GLN    25        .085  -5.877   5.096  1.00  0.00              
+ATOM     26  CA  GLN    26       -.856  -5.563   8.757  1.00  0.00              
+ATOM     27  CA  TYR    27       1.356  -8.520   9.698  1.00  0.00              
+ATOM     28  CA  LEU    28       4.342  -7.279   7.784  1.00  0.00              
+ATOM     29  CA  ASN    29       4.064  -3.735   9.328  1.00  0.00              
+ATOM     30  CA  VAL    30       4.069  -5.352  12.824  1.00  0.00              
+ATOM     31  CA  VAL    31       7.001  -7.699  12.162  1.00  0.00              
+ATOM     32  CA  THR    32       9.068  -4.861  10.736  1.00  0.00              
+ATOM     33  CA  ARG    33       7.995  -2.499  13.658  1.00  0.00              
+ATOM     34  CA  HIS    34       6.779    .039  11.099  1.00  0.00              
+ATOM     35  CA  ARG    35       3.108    .616  11.852  1.00  0.00              
+ATOM     36  CA  TYR    36       2.765   3.446   9.296  1.00  0.00              
+TER      36      TYR    36                                                      
+MASTER       76    0    1    2    0    0    0    6  302    1    0    3          
+END                                                                             

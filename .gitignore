@@ -1,0 +1,12 @@
+/Xdeprecated/suffclass/herman
+/Xdeprecated/scpscripts/keys
+/library_unused
+/library_own/lga/lga_bin
+/library_own/threefrags/*.mat
+/library_own/hydros/*.mat
+/data/DSbond.mat
+/data/DSxray.mat
+/data/HEFG/old
+/Xdeprecated/database/mats/geomdb.mat
+/library/cvx/sedumi/examples
+/library/cvx/examples

@@ -1,0 +1,38 @@
+% min F(X)  subject to:  A*X  <= B, Aeq*X  = Beq    (linear constraints)
+%  X                     C(X) <= 0, Ceq(X) = 0      (nonlinear constraints)
+%                        LB <= X <= UB              (bounds)
+%
+% [X,FVAL,EXITFLAG,OUTPUT,LAMBDA] 
+%           = KTRLINK(FUN,X0,A,B,Aeq,Beq,LB,UB,NONLCON,OPTIONS,knitroOptionsFile)
+% INPUT: starts at X0 and finds a minimum X to the function FUN, 
+%           subject to the linear inequalities A*X <= B.
+%           subject to the linear equalities Aeq*X = Beq as well as A*X <= B. 
+%               (Set A = [] and B = [] if no inequalities exist.)
+%           subject to a set of lower and upper bounds on the design variables, X, 
+%               so that a solution is found in the range LB <= X <= UB. Use empty 
+%               matrices for LB and UB if no bounds exist. Set LB(i) = -Inf if X(i) 
+%               is unbounded below; set UB(i) = Inf if X(i) is unbounded above.
+%           subjects the minimization to the constraints defined in NONLCON. The 
+%               function NONLCON accepts X and returns the vectors C and Ceq, 
+%               representing the nonlinear inequalities and equalities respectively. 
+%               KTRLINK minimizes FUN such that C(X) <= 0 and Ceq(X) = 0. 
+%               (Set LB = [] and/or UB = [] if no bounds exist.)
+%           minimizes  with the default optimization parameters replaced by values 
+%               in the structure OPTIONS, an argument created with the OPTIMSET 
+%               function. See OPTIMSET for details. For a list of options accepted 
+%               by FMINCON refer to the documentation. Use OPTIONS = [] as a  place 
+%               holder if no options are set.
+% OUTPUT:  FVAL returns the value of the objective function FUN at the solution X.
+%          EXITFLAG that describes the exit condition of KTRLINK. For possible 
+%               values of EXITFLAG and the corresponding exit conditions, refer to 
+%               KNITRO (R) documentation.
+%          OUPUT returns a structure OUTPUT with the number of iterations taken in 
+%               OUTPUT.iterations, the number of function evaluations in 
+%               OUTPUT.funcCount, the algorithm used in OUTPUT.algorithm, the 
+%               first-order optimality in OUTPUT.firstorderopt, and the exit message 
+%               in OUTPUT.message.
+%          LAMBDA returns the Lagrange multipliers at the solution X: LAMBDA.lower 
+%               for LB, LAMBDA.upper for UB, LAMBDA.ineqlin is for the linear 
+%               inequalities, LAMBDA.eqlin is for the linear equalities, 
+%               LAMBDA.ineqnonlin is for the nonlinear inequalities, and 
+%               LAMBDA.eqnonlin is for the nonlinear equalities.

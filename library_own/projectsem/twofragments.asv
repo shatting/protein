@@ -1,0 +1,36 @@
+
+sample = sampledata(data,100);
+%sample = data;
+
+threefrags.count = zeros(24,24,24);
+threefrags.angle = cell(24,24,24);
+
+numpr = length(sample);
+
+for pr=1:numpr,
+    
+    seq = sample{pr}.seq;
+    bond = sample{pr}.bond;
+    
+    numaa = length(seq);    
+
+    for i=1:numaa-2,
+        aa1 = seq(i);
+        aa2 = seq(i+1);
+        aa3 = seq(i+2);
+        threefrags.count(aa1,aa2,aa3) = threefrags.count(aa1, aa2, aa3) + 1;
+        
+        if (length( threefrags.angle{aa1,aa2,aa3} ) == 0)
+            threefrags.angle{aa1,aa2,aa3} = [];
+        end
+        b1 = double(bond(i,:));
+        b2 = double(bond(i+1,:));
+        
+        angle = b1*b2'/(
+        
+        threefrags.angle{aa1,aa2,aa3} = [threefrags.angle{aa1,aa2,aa3} ];
+    end
+    
+end
+
+threefrags

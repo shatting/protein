@@ -1,0 +1,96 @@
+% actual runtimes for fit:
+% rmds here are in units of 0.1 angstrom
+
+%   chain  naa    avgtime             exit  actrmsd       rmsds
+%    323   10     0.42 +/- 0.06       10                  [26.20 (HMM 4), 40.11 (HMM 6)] mean=33.34 +/- 4.51 sigma
+%   1313   31     12.44 +/- 1.66      2  
+%(h)1322   33     40.58 +/- 33.11           24.76!        [55.81 (HMM 4), 122.71 (HMM 7)] mean=80.21 +/- 17.60 sigma
+%      2   67     77.68 +/- 25.52     0     94.22         [152.94 (HMM 7), 192.88 (HMM 1)] mean=179.75 +/- 13.36 sigma
+% from now on dual core, 10 hmm seqs
+%   1300  108     23:52 minutes             102.64        [248.63 (HMM 10), 342.73 (HMM 4)] mean=281.82 +/- 26.75 sigma
+%     11  158     38:30 minutes             206.90        [211.11 (HMM 9), 287.66 (HMM 5)] mean=232.19 +/- 21.90 sigma
+
+% runtimes test (no actual s, 10hmm)    
+% chain     naa     profile     totaltime       bestrmsd        exit0    exitok
+% 323       10      1           4.354           26.20 (HMM 4)   10
+% 323       10      2           11.085          26.20 (HMM 4)   10
+% 323       10      4           18.081          26.20 (HMM 4)   10
+% 1313      31      1           2:04 minutes	91.48 (HMM 8)   2        8
+% 1313      31      2           1:28 minutes	91.48 (HMM 8)   2        8
+% 1313      31      4           1:11 minutes    91.48 (HMM 8)   2        8
+% 2         67      1           ~12min          152.94 (HMM 7)  
+% 2         67      4           6:25 minutes    152.94 (HMM 7)  
+% 1322      33      4           3:49 minutes    55.81 (HMM 4)            10
+% 1300     108      2           23:52 minutes   248.63 (HMM 10)          10
+% 1300     108      4           16:17 minutes   248.63 (HMM 10)          10
+% after objective optimization: 
+% 1300     108      4           8:34 minutes    248.63 (HMM 10)          10
+%   11     158      4           16:18 minutes   211.11 (HMM 9)           10
+% after gradients
+% 1300     108      4           4:16 minutes    39213           2        8
+
+% after hydro+cc+gradients+4cores
+% 1300     108      4           1:32 minutes    3743   125.60 (HMM 8)  BUT 10 of 10 INFEASIBLE!
+% 1300     108      4           3:39 minutes    3200   123.92 (HMM 8)  BUT 1 of 10 INFEASIBLE! active set + nonlin constraints relaxed
+
+
+% overall speed improvement from 1 to 4 workers and optimized objective:
+% chain 11: 77 min -> 16 min, 1488165 fevals -> 235130070 frags
+% raw frag rate of seq_pots_fast: 1662143/s   function eval time = 2.35 min
+% raw frag rate of seq_pots: 231676/s         function eval time = 16.9 mins
+% knitro time: 77(total) - 16.9(feval) = 60(knitro) ~ 61.5 = 16*4 - 2.35
+% percentage of objective on overall time went from 22% to 3.7%
+
+% hmm   naa   time single        time cluster       rmsd
+% 100   10    30.242secs         30.360sec
+% 1000  10                       3:05 minutes       12.93 (687)
+% 5000  10                       14:13 minutes      12.93 (687)
+
+% measure taken  chain   naa   time         fevals     rmsd
+% initial value  1313    31    57.187 sec   250284     91.48 (HMM 8)
+% pass handle    1313    31    1:48 min     250284     91.48 (HMM 8)
+% gradients      1313    31    21.800 sec   21125      91.48 (HMM 8) 
+% grad+savex     1313    31    23.294 sec   21125      91.48 (HMM 8)
+
+% seq_pots_test.m use method        time          frags/s
+% seq_pots_fast                     0.145 sec     1530195
+% fevaldata2 (pass by ref)          0.206 sec     1077282
+% fevaldata (instance function,ref) 0.243 sec     911817
+% fevaldata2 (pass by val)          0.339 sec     653611
+% fevaldata (instance function,val) 0.384 sec     577295
+
+% 10 HMMs
+% measure taken  chain   naa   time         fevals     rmsd
+% initial value  1313    31    2:18 minutes 272153     91.48 (HMM 8)
+% cc(1.5)        1313    31    6:44 minutes 256754     91.48 (HMM 8)
+% hydro(.8-1.2)  1313    31    2:07 minutes 72238      73.22 (HMM 8)
+% hydro(.8-1.2)+cc(1.1)1313 31 3:14 minutes 109152     73.22 (HMM 8)
+% hydro(0.9-1.1) 1313    31    1:55 minutes 75469      70.49 (HMM 8)
+% hydro(1-1)     1313    31    1:44 minutes 72130      67.03 (HMM 8)
+% hydro(1-1)+cc(1.1) 1313 31   2:05 minutes 71453      67.03 (HMM 8)
+
+% 4 cores@4ghz  hydro(.8-1.2)+cc(1.1) findiff 1313  31   30.742 sec  109152      73.22 (HMM 8)
+% 1 core@4ghz  hydro(.8-1.2)+cc(1.1) hand AD 1313   31   18.163 sec  2446        73.22 (HMM 8)
+% 4 cores@4ghz  hydro(.8-1.2)+cc(1.1) hand AD 1313  31   9.555 sec   2490        73.22 (HMM 8)
+
+% AD. hmm=1
+% 1313  initial             6.099 sec       6700 fevals     83.14 (HMM 1)
+% 1313  intlab AD           9.680 sec       195 fvals       83.14 (HMM 1) 0.6301x
+% 1313  opt AD geom         3.007 sec       195 fvals       83.14 (HMM 1) 2.0283x
+% 1313  opt AD geom+cc      2.388 sec       195 fvals       83.14 (HMM 1) 2.5540x
+% 1313  opt AD geom+cc+coords 1.788 sec     195 fvals       83.14 (HMM 1) 3.4111x
+%
+% 2     initial             1:13            45672           110.03 (HMM 1)
+% 2     intlab AD           1:43            1811            110.03 (HMM 1) 0.7087x
+% 2     opt AD              42.483 sec      1709            110.03 (HMM 1) 1.72x
+% 2     opt AD geom+cc      29.980 sec      1299            110.03 (HMM 1) 2.4x
+% 2     opt AD geom+cc+coords 25.567 sec    1299            110.03 (HMM 1) 2.9x
+% different potentials
+% 2     opt AD geom+cc+coords 19.754 sec    1831            82.25 (HMM 6) testing pot
+% 2     opt AD geom+cc+coords 19.754 sec    1831            82.18 (HMM 4) ent=0 
+% 2     opt AD geom+cc+coords 19.754 sec    1831            84.34 (HMM 7) ent=0 unsupervised 
+% 2     opt AD geom+cc+coords 19.754 sec    1831            90.21 (HMM 9) ent=1 unsupervised      
+% 2     opt AD geom+cc+coords 19.754 sec    1831            71.07 (HMM 5) ent=1 cat_prior_reg: 0.0100 cat_cond_reg: 0.0500
+% 2     opt AD geom+cc+coords 19.754 sec    1831            82.09 (HMM 6) ent=1 cat_prior_reg: 0.1000 cat_cond_reg: 0.1000
+% 2     opt AD geom+cc+coords 19.754 sec    1831            98.57 (HMM 3) ent=1 cat_prior_reg: 0.0100 cat_cond_reg: 0.0100
+% 2     opt AD geom+cc+coords 19.754 sec    1831            69.98 (HMM 7) ent=0.8 cat_prior_reg: 0.0100 cat_cond_reg: 0.0500

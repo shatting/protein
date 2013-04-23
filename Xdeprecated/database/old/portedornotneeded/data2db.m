@@ -1,0 +1,92 @@
+function [ db ] = data2db( rtfile )
+%DATA 
+
+load(rtfile);
+tic
+%nch=length(data); % number of chains
+%fieldnames(data{1})% contents of data set
+mklen=1;   % create length entries if not yet there
+mkcos=1;   % create cosine entries if not yet there
+mktors=1;  % create torsion entries if not yet there
+nch=length(data)
+   
+% simple statistics
+naa=zeros(1,nch);
+res=zeros(1,nch);
+svdbb=zeros(3,nch);
+afreq=zeros(24,1);
+res24=inf;
+for ch=1:nch,
+  if rem(ch,100)==0,
+    disp(['chain ',num2str(ch),showtime]);
+  end;
+  dat=data{ch};
+
+  % amino acid frequencies
+  aa=dat.seq;% amino acid sequence
+  naa(ch)=length(aa);
+  res(ch)=dat.res; 
+  % if res(ch)==0, res(ch)=inf;data{ch}.res=inf; end;
+  for t=1:naa(ch),
+    afreq(aa(t))=afreq(aa(t))+1;
+    if t>naa(ch)-4, break; end;
+  end;
+  if max(aa)>23, res24=min(res24,res(ch)); end;
+
+  % global rotational invariants
+  bb=double(dat.bond);% bond vector sequence
+  svdbb(:,ch)=svd(bb); % bond matrix singular values
+
+  % create additional information
+  if mklen | mkcos | mktors,
+    % make length data:           len(t)=norm(bond(t,:),2);
+    len=sqrt(bb(:,1).^2+bb(:,2).^2+bb(:,3).^2);
+    if mklen, data{ch}.len=uint8(round(5*len)); end;
+  end;
+  if mkcos | mktors,
+    ind1=1:naa(ch)-2;
+    ind2=2:naa(ch)-1;
+    rr=bb./[len len len];  % normalized bond vectors
+    cc=rr(ind1,1).*rr(ind2,1)+rr(ind1,2).*rr(ind2,2)...
+      +rr(ind1,3).*rr(ind2,3);
+    if mkcos, data{ch}.cos=int8(round(100*cc)); end;
+  end;
+  if mktors,
+    tors=zeros(naa(ch)-3,2);
+    ind1=1:naa(ch)-3;
+    ind2=3:naa(ch)-1;
+    ccc=rr(ind1,1).*rr(ind2,1)+rr(ind1,2).*rr(ind2,2)...
+       +rr(ind1,3).*rr(ind2,3);
+    t1=ccc-cc(ind1).*cc(ind1+1);
+    t2=zeros(naa(ch)-3,1);
+    for t=1:naa(ch)-3,
+      t2(t)=det(rr(t:t+2,:));
+    end;
+    ss=sqrt(1-cc.^2);
+    t0=ss(1:end-1).*ss(2:end)+realmin;
+    tors(:,1)=t1./t0;
+    tors(:,2)=t2./t0;
+    tors(:,3)=atan2(tors(:,1),tors(:,2))/pi;
+    data{ch}.tors=int8(round(100*tors));
+  end;
+end;
+
+readme=[
+'% .geom{ch} contains (some of) the fields                      '
+'%   .name    % name of subchain                                '
+'%   .res     % resolution (-1 = NMR)                           '
+'%   .seq     % amino acid sequence, uint8                      '
+'%   .bond    % bond vectors, 3 columns, int8                   '
+'%   .len     % bond lengths in units of 0.02A, uint8           '
+'%   .cos     % 100*cosine of bond angles, int8                 '
+'%   .tors    % 100*(cos,sin,atan2()/pi) of torsion angles, int8'
+'%   .gram    % Gram matrix entries, int16                      '
+];
+
+db.geom = data;
+db.nch = nch;
+db.afreq = afreq;
+db.readme = readme;
+db.naa = sum(naa);
+db.nfrag = sum(naa-3);
+db.res24 = res24;

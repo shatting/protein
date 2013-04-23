@@ -1,0 +1,28 @@
+geomdb.
+    geomdata: {1x1334 cell} 
+             name: '1a04_A01'
+              res: 2.2000
+              seq: [138x1 uint8]
+             bond: [137x3 int8]
+                r: [137x3 double]
+                c: [136x1 double]
+                s: [136x1 double]
+                t: [135x1 double]
+               tp: [135x1 double]
+             beta: [135x1 double]
+            svdbb: [3x1 double]
+
+         nch: 1334
+       afreq: [24x1 double]
+      readme: [7x63 char]
+         naa: 225998
+       nfrag: 221996
+       res24: -1
+       svdbb: [3x1334 double]
+
+fragdata.
+            data: [221491x5 double]
+             seq: [221491x4 double]
+    featurenames: {'c'  'cp'  't'  'tp'  'beta' '...' ...}
+            hefg: [221491x1 double]
+           hel27: [221491x1 double]

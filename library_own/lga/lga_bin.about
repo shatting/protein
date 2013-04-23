@@ -1,0 +1,3 @@
+collect_pdb.pl pdbfil > mol2 file:  converts pdb files to MOL2 files
+
+

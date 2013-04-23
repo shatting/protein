@@ -1,0 +1,34 @@
+** the alphas are causing problems!!! alphas were made for old z's with the old classes. 
+* they come up in geometry2bond, bond2geometry, and in geometry2bond part of ampl!!!
+* need new bond2geometry, geometry2bond - ugh!
+
+
+Made some updates, especially to the covariance model, since its features shouldn’t be [c c+ t t’] but 
+[c c+ tx] with tx=sin(beta) iff tclass =1,3 and tx=cos(beta) iff tclass=2,4
+
+So i have done it, was a lot more complicated than ive thought J 
+should be on svn.. core function is
+function [ sbond, gseq ] = new_deal_hefg_interface( ndstruct, bond, seq )
+% [ sbond, gseq ] = new_deal_hefg_interface( ndstruct, bond, seq )
+% get protein classes
+% [ conf ] = new_deal_hefg_interface( ndstruct)
+% get only confusion matrix
+% [ conf, cov ] = new_deal_hefg_interface( ndstruct, data )
+% get confusion matrix and covariance model (slow)
+% IN:
+% ndstruct ... new_deal_data struct, eg. from "load new_deal_ginny"
+% bond ... bond sequence, eg. from data{1}.bond
+% seq ... aa sequence, eg. from data{1}.seq
+% data ... data from RT*.mat or DSbond.mat
+% OUT: (see interface.pdf)
+% sbond ... s(bond)
+% gseq ... \gamma(seq)
+% conf(i,j)... C_{S\Gamma}(i,j)
+% cov(k) ... struct with fields: 
+% [sys10toX(k,[ns ng])==[i j], sysXto10([i j],[ns ng])==k]
+% .freq ... number of elements (=conf(i,j))
+% .mean ... <(c,c+,t,t')>_D = \mu_{ij}  % I guess this is different now, bc of message above
+% .L ... L_{ij} = inv(chol(cov)')
+% .ent ... e_{ij} = log(det(L)) = log(sqrt(det(C^-1)))
+% .cov ... <(c,c+,t,t')*(c,c+,t,t')'>_D = L^-1*L^-T  % I guess this is different now, bc of message above
+New_deal_ginny.mat is up-to-date and contains the classifier we talked about with prof n.

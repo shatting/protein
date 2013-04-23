@@ -1,0 +1,17 @@
+function [t] = cell2str( data, naa )
+%BASICANAYSIS Summary of this function goes here
+%   Detailed explanation goes here
+
+nchains = min(naa,length(data));
+perm = randperm(length(data));
+
+j = 1;
+
+for i=perm(1:nchains),
+   t(j).res = data{i}.res;
+   t(j).name = data{i}.name;
+   t(j).seq = data{i}.seq;
+   t(j).bond = data{i}.bond;
+   
+   j = j + 1;
+end

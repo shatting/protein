@@ -1,0 +1,30 @@
+-- database --
+chain db
+x- the default stuff: bond, res, aaseq, name
+x- augment with angles
+    - cos alpha, sin alpha
+    - cos beta, sin beta, beta
+
+-- features --
+x- linearly addressed, of all frags, i.e. a matrix
+x- diverse features: c, t, beta, hel27, hefg
+- the z feature: could be added in classifier?  
+
+-- geometry (s) class classifier -- 
+x- derive s class from frag geometry
+x- derive s class from chain geometry
+	for HEL27, HEFG, .. ?
+	no, for arbitrary classification routines
+x- so, make it pluggable!
+x- get z for HEL
+- verify z for HEL
+x get z for HEFG
+
+-- gamma classifier --
+x a way to get gamma classes from an aa sequence
+
+-- optimizer --
+x - input: 
+
+
+
